@@ -34,5 +34,13 @@ export class SinglePurposeFunctionStack extends Stack {
       handler: "multiply.handler",
       code: lambda.Code.fromAsset("lambda"),
     });
+
+    // =============================================================================
+    // api gateway lambdaRestApi
+    // =============================================================================
+    const api = new apigateway.LambdaRestApi(this, "api", {
+      handler: addLambda,
+      proxy: false, // If true, route all requests to the Lambda Function. If set to false, you will need to explicitly define the API model using addResource and addMethod (or addProxy).
+    });
   }
 }
