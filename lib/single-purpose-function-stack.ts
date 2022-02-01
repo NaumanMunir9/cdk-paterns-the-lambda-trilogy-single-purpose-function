@@ -16,5 +16,14 @@ export class SinglePurposeFunctionStack extends Stack {
       handler: "add.handler",
       code: lambda.Code.fromAsset("lambda"),
     });
+
+    // =============================================================================
+    // subtract lambda function
+    // =============================================================================
+    const subtractLambda = new lambda.Function(this, "subtractLambda", {
+      runtime: lambda.Runtime.NODEJS_14_X,
+      handler: "subtract.handler",
+      code: lambda.Code.fromAsset("lambda"),
+    });
   }
 }
