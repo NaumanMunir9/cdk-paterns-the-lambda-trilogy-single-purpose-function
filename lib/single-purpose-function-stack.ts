@@ -42,5 +42,20 @@ export class SinglePurposeFunctionStack extends Stack {
       handler: addLambda,
       proxy: false, // If true, route all requests to the Lambda Function. If set to false, you will need to explicitly define the API model using addResource and addMethod (or addProxy).
     });
+
+    // =============================================================================
+    // Represents the root resource of this API endpoint ('/'). Resources and Methods are added to this resource
+    // =============================================================================
+    api.root
+      .resourceForPath("add") // Gets or create all resources leading up to the specified path.
+      .addMethod("GET", new apigateway.LambdaIntegration(addLambda)); // Defines a new method for this resource
+
+    api.root
+      .resourceForPath("subtract") // Gets or create all resources leading up to the specified path.
+      .addMethod("GET", new apigateway.LambdaIntegration(subtractLambda)); // Defines a new method for this resource
+
+    api.root
+      .resourceForPath("multiply") // Gets or create all resources leading up to the specified path.
+      .addMethod("GET", new apigateway.LambdaIntegration(multiplyLambda)); // Defines a new method for this resource
   }
 }
